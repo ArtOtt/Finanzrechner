@@ -34,6 +34,11 @@ class AusgabenReschner {
         return summ;
     }
 
+    //Geld das nach Abzug der Fixkosten übergig bleibt
+    get nachFixKosten() {
+        return this._gehalt = this._gehalt - this.summfix; 
+    }
+
 
 
     //Summe aller Ausgaben
@@ -45,7 +50,7 @@ class AusgabenReschner {
         return summ;
     }
 
-    // Aktuelles Saldo: Gehalt - (Ausgabe + Fixkosten)
+    // Aktuelles Saldo: Gehalt - (Ausgaben + Fixkosten)
     get saldo() {
         return this._gehalt - (this.summAusgaben + this.summfix);
     }
@@ -71,7 +76,7 @@ class AusgabenReschner {
 
     // Bonuszahlung zum Gehalt summieren und zusätlich 
     // speicherung in _bonusGehalt
-    addBous(zahl, name) {
+    addBonus(zahl, name) {
         let objekt = {
         Betrag:zahl,
         name:name,
@@ -91,19 +96,12 @@ Test.addAusgabe(5, "Kaffe");
 Test.addAusgabe(4, "Brot");
 Test.addAusgabe(5, "Käse");
 
-console.log(Test.ausgaben);
 
-console.log(Test.summAusgaben);
- 
 Test.addFix(16, "Spotify");
 Test.addFix(20, "Fitnesstudio");
+Test.addBonus(100, "Wheinachtsgeld");
 
 
 
-console.log(Test.saldo)
-console.log(Test.bonusGehalt)
-
-Test.addBous(100, "Wheinachtsgeld");
-
-console.log(Test.saldo)
-console.log(Test.bonusGehalt)
+console.log(Test.nachFixKosten);
+console.log(Test.gehalt)

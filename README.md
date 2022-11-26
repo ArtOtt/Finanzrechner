@@ -19,7 +19,6 @@ Errechnung der monatlichen Sparsumme.
 - [x] Eingabe von Ausgaben Zahl(Wert des Betrags) und String(Bennenung der Ausgaben)
 - [x] Ausgaben die gemacht wurden addieren und vom Gehalt abziehen
 - [x] FixKosten Eingabe erstellen und Wert vom Monatseinkommen abziehen 
-- [ ] Ausgabe: Geld das zur Verfügung steht, nach Abzug alles Ausgaben.
+- [x] Ausgabe: Geld das zur Verfügung steht, nach Abzug aller Fixfosten.
 - [ ] Eigenschaft Sparen hinzufügen und getter
-- [ ] Methode für möglichen Sparbetrag
-- [ ] Sparbetrag festlegen und monatliche addierung des Sparbetrag erstelen
+- [ ] Sparbetrag festlegen und monatliche vom Gehalt zu Sparbereich transferieren.
