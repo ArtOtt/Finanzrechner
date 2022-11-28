@@ -5,10 +5,12 @@ class AusgabenReschner {
         this._ausgaben = [];
         this._fixAusgaben = [];
         this._bonusGehalt = [];
-        
+        this._sparRate = 0;
+        this._sparGuthaben = []; // [{Date: 12.12.22, Einzahlung: 100},{...}]
+        this._summSparGuthaben = 0;
     }
 
-    // Ausgabe von Gehalt, Ausgaben, Fixkosten, Bonusgehalt
+    // Ausgabe von Gehalt, Ausgaben, Fixkosten, Bonusgehalt, Sparrate, Sparguthaben
     get gehalt() {
         return this._gehalt
     }
@@ -25,6 +27,12 @@ class AusgabenReschner {
         return this._bonusGehalt
     }
 
+    get sparRate() {
+        return this._sparRate
+    }
+
+
+
     //Summe aller Fixkosten
     get summfix() {
         let summ = 0;
@@ -33,13 +41,6 @@ class AusgabenReschner {
         }
         return summ;
     }
-
-    //Geld das nach Abzug der Fixkosten übergig bleibt
-    get nachFixKosten() {
-        return this._gehalt = this._gehalt - this.summfix; 
-    }
-
-
 
     //Summe aller Ausgaben
     get summAusgaben() {
@@ -50,10 +51,11 @@ class AusgabenReschner {
         return summ;
     }
 
-    // Aktuelles Saldo: Gehalt - (Ausgaben + Fixkosten)
-    get saldo() {
-        return this._gehalt - (this.summAusgaben + this.summfix);
+    get sparGuthaben() {
+        return this._sparGuthaben
     }
+
+    
 
     // Monatliche Fixkosten eintragen
     addFix(zahl, name){
@@ -62,6 +64,7 @@ class AusgabenReschner {
         time: new Date()
         }
         this._fixAusgaben.push(objekt);
+        this._gehalt -= zahl;
     }
 
     // Ausgaben eintragen
@@ -71,7 +74,8 @@ class AusgabenReschner {
         name:name,
         time: new Date()
     }
-    this._ausgaben.push(objekt);    
+    this._ausgaben.push(objekt);
+    this._gehalt -= zahl;    
     }
 
     // Bonuszahlung zum Gehalt summieren und zusätlich 
@@ -86,22 +90,45 @@ class AusgabenReschner {
     this._gehalt += zahl;    
     }
 
-  
+    // Monatlichen Sparbetrag festlegen 
+    addSparRate(number) {
+        this._sparRate = number;
+        let objekt = {
+            date: new Date(),
+            Einzahlung: number
+        }
+        this._sparGuthaben.push(objekt)
+        this._summSparGuthaben += number
+    }
+
 
 }
+
+
+
 const Test = new AusgabenReschner(1000);
 
-Test.addAusgabe(12, "Bröttchen");
+Test.addAusgabe(10, "Bröttchen");
 Test.addAusgabe(5, "Kaffe");
-Test.addAusgabe(4, "Brot");
-Test.addAusgabe(5, "Käse");
+Test.addAusgabe(5, "Brot");
 
 
-Test.addFix(16, "Spotify");
+
+Test.addFix(20, "Spotify");
 Test.addFix(20, "Fitnesstudio");
+
 Test.addBonus(100, "Wheinachtsgeld");
 
 
 
-console.log(Test.nachFixKosten);
-console.log(Test.gehalt)
+
+//console.log(Test._ausgaben)
+
+
+Test.addSparRate(100)
+
+console.log(Test.sparRate)
+
+ console.log(Test.sparGuthaben)
+
+ console.log(Test._summSparGuthaben)
