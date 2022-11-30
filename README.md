@@ -21,7 +21,10 @@ Errechnung der monatlichen Sparsumme.
 - [x] FixKosten Eingabe erstellen und Wert vom Monatseinkommen abziehen 
 - [x] Ausgabe: Geld das zur Verfügung steht, nach Abzug aller Fixfosten.
 - [x] Eigenschaft Sparen hinzufügen und getter
-- [ ] Sparbetrag festlegen und vom Gehalt zu Sparbereich transferieren.
+- [x] Sparbetrag festlegen und vom Gehalt zu Sparbereich transferieren.
 - [ ] Entnahme von Sparguthaben mit Trackíng
-- [ ] EInmalzahlung zum Sparguthaben mit Tracking. Von Guthaben > Sparguthaben.
-- [ ] EInmalzahlung zum Sparguthaben mit Tracking. Bonuszahlung > Sparguthaben.
+- [x] EInmalzahlung zum Sparguthaben mit Tracking. Von Guthaben > Sparguthaben.
+- [x] EInmalzahlung zum Sparguthaben mit Tracking. Bonuszahlung > Sparguthaben.
+- [ ] Verfüghbrares Spaßgeld auf 4 Wochen aufteilen
+- [ ] Spaßgeld ausrechen
+- [ ] Eingang von Gehalt bzw. beginn des nächsten Monat dafür, Gehalt, erhöhüng des Sparguthaben, ect. anpassen.  

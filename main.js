@@ -8,9 +8,10 @@ class AusgabenReschner {
         this._sparRate = 0;
         this._sparGuthaben = []; // [{Date: 12.12.22, Einzahlung: 100},{...}]
         this._summSparGuthaben = 0;
+        
     }
 
-    // Ausgabe von Gehalt, Ausgaben, Fixkosten, Bonusgehalt, Sparrate, Sparguthaben
+    // Ausgabe von Gehalt, Ausgaben, Fixkosten, Bonusgehalt, Sparrate, Sparguthaben, Summe des Sparguthabens
     get gehalt() {
         return this._gehalt
     }
@@ -55,26 +56,29 @@ class AusgabenReschner {
         return this._sparGuthaben
     }
 
+    get summSparGuthaben() {
+        return this._summSparGuthaben;
+    }
+
     
 
     // Monatliche Fixkosten eintragen
     addFix(zahl, name){
-        let objekt = {Betrag:zahl,
-        name:name,
-        time: new Date()
-        }
-        this._fixAusgaben.push(objekt);
+        this._fixAusgaben.push({
+            Betrag:zahl,
+            name:name,
+            time: new Date()
+            });
         this._gehalt -= zahl;
     }
 
     // Ausgaben eintragen
      addAusgabe(zahl, name) {
-        let objekt = {
+    this._ausgaben.push({
         Betrag:zahl,
         name:name,
         time: new Date()
-    }
-    this._ausgaben.push(objekt);
+    });
     this._gehalt -= zahl;    
     }
 
@@ -93,12 +97,37 @@ class AusgabenReschner {
     // Monatlichen Sparbetrag festlegen 
     addSparRate(number) {
         this._sparRate = number;
-        let objekt = {
-            date: new Date(),
-            Einzahlung: number
-        }
-        this._sparGuthaben.push(objekt)
+        this._sparGuthaben.push(
+            {date: new Date(),
+            Einzahlung: number});
         this._summSparGuthaben += number
+    }
+
+    // Einmalige Sonderzahlung von Gehalt zu Sparguthaben !!
+    addSparGuthaben(number) {
+        this._gehalt -= number;
+        this._sparGuthaben.push(
+            {date: new Date(),
+            Einmalzahlung: number});
+        this._summSparGuthaben += number
+    }
+
+     // Einmalige Sonderzahlung von Aussen(Bonusszahlung) zu Sparguthaben !!
+     addBonusSparen(number) {
+        this._sparGuthaben.push(
+            {date: new Date(),
+            Einmalzahlung: number});
+        this._summSparGuthaben += number
+    }
+
+    //Auzahlung vom Sparguthaben 
+
+    entnahmeSparguthaben(number) {
+        this._sparGuthaben.push(
+            {date: new Date(),
+            Auszahlung: number});
+        this._summSparGuthaben -= number
+
     }
 
 
@@ -123,12 +152,13 @@ Test.addBonus(100, "Wheinachtsgeld");
 
 
 //console.log(Test._ausgaben)
+console.log("Gehalt: "+Test.gehalt)
 
+Test.addBonusSparen(999);
+Test.addSparGuthaben(100)
+Test.entnahmeSparguthaben(91)
+console.log("Gehalt: "+Test.gehalt)
+console.log(Test.sparGuthaben)
 
-Test.addSparRate(100)
+console.log(Test.summSparGuthaben)
 
-console.log(Test.sparRate)
-
- console.log(Test.sparGuthaben)
-
- console.log(Test._summSparGuthaben)
